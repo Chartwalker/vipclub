@@ -6,10 +6,12 @@ TSC_TIMESTAMP=`date "+%d.%m.%Y %H:%M:%S"`
 
 # name of the game :-)
 TSC_Proj="vipclub"
+TSC_LANG_DE="de"
 
 # directories
 TSC_Src="./src/"
-TSC_Doc="./doc"
+TSC_Doc="./doc/"
+TSC_RPMS="./rpms/"
 
 # version
 TSC_Major="0"
@@ -22,6 +24,8 @@ TSC_Name=$TSC_Proj-$TSC_Major.$TSC_Minor.$TSC_Release-$TSC_Patch
 TSC_CMK=$TSC_Src"config.mk"
 TSC_H=$TSC_Src"config.h"
 TSC_MF=$TSC_Src"Makefile"
+TSC_SPEC=$TSC_RPMS$TSC_Name".spec"
+
 
 TSC_Echo=`which echo`
 TSC_Echoe=`which echo`" -e"
@@ -55,3 +59,19 @@ tsc_write_env (){
 
 tsc_write_env "" "#" "" "=" $TSC_CMK
 tsc_write_env "#define " "//" "" " " $TSC_H
+
+tsc_write_spec (){
+    $TSC_Echoe "$1\n$1 Spec-File ($2) for "$2"\n$1" > $3
+    $TSC_Echoe "Summary: A VIP-Club ($2) Plugin for Broadcasters" >> $3
+    $TSC_Echoe "Version: "$TSC_Major"."$TSC_Minor  >> $3
+    $TSC_Echoe "Release: "$TSC_Release"-"$TSC_Patch >> $3
+    $TSC_Echoe "License: MIT" >> $3
+    $TSC_Echoe "Group: Applications/Multimedia" >> $3
+    $TSC_Echoe "Source: https://github.com/Chartwalker/VipClub/stable/"$TSC_Name".src.tgz" >> $3 
+    $TSC_Echoe "URL: https://github.com/Chartwalker/VipClub/stable/doc/index.html" >> $3
+    $TSC_Echoe "Group: Applications/Multimedia" >> $3
+    $TSC_Echoe "\n%description:"`cat doc/rpm-description-$2.txt`"\n\n" >> $3
+
+}
+
+tsc_write_spec "#" $TSC_LANG $TSC_SPEC
