@@ -1,0 +1,50 @@
+.TH vipclub 1 (de) 
+
+.SH NAME
+.B vipclub \- ist ein Plugin für Webbrowser mit einer Admin-Console und mit 
+einem Webinterface.
+
+.SH SYNOPSIS
+
+.B vipclub config.json
+
+Mit VIPCLUB kann man während einer Livesendung interaktiv mit dem Sender 
+kommunizieren und Beiträge einreichen, die nach Prüfung in die 
+Sendewarteschlange eingestellt und mit geringer Verzögerung gesendet werden.
+
+Die Mitarbeit am Projekt ist jedem möglich, jedoch werden einige Kernbestandteile 
+aus Sicherheitsgründen und aus Gründen des Quellenschutzes nicht im vollen 
+Umfang open source sein können, jedoch als DLL/lib verfügbar sein."
+
+.B Systemvoraussetzungen
+
+.RS
+\(bu one - Cygwin, rpm-basiertes Linux //
+\(bu two - Glib) //
+.RE
+
+- GTK+
+- uncgi.a (cgi-Kommunikation)
+- C-Compiler
+
+.B Bibliotheken
+
+- libvipcl-cgi.a (Webclient)
+- libvipcl-cli.a (Consolen-Client)
+- libvipcl-gui.a (GTK-Client)
+- libvipcl-mobi.a (Mobile-Client)
+- libvipcl-adm.a (Admin-Console, Zugang)
+- libvipcl-bstg.a (Backstage-Console für DMX, dig. I/O)
+- libvipcl-stream.a (Medien-I/O)
+
+- Konfiguation: json, Configure(config.mk, config.h, Makefile)
+- Methoden: init(), stat(), debug()
+
+.P PS: die Funktionalität kommt erst schrittweise hinzu.
+
+.B Installation
+
+
+    ./Configure
+    ./Make all install
+
