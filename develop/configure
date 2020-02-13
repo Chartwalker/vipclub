@@ -25,8 +25,7 @@ TSC_SPEC=$TSC_RPMS$TSC_Name".spec"
 TSC_Echo=`which echo `
 TSC_Echoe=`which echo `" -e"
 TSC_MK=`which make `
-TSC_AR=`which ar`
-TSC_RANLIB=`which ranlib`
+TSC_AR=`which ar`" -rs"
 TSC_Libs="-L "`pwd`"/../lib"
 TSC_Incl="-I "`pwd`"/../incl"
 
@@ -59,7 +58,6 @@ tsc_write_env(){
     $TSC_Echoe $1"TSC_MK$4"$TSC_MK >> $5
     $TSC_Echoe $1"CC$4"$CC >> $5
     $TSC_Echoe $1"AR$4"$AR >> $5
-    $TSC_Echoe $1"RANLIB$4"$RANLIB >> $5
     $TSC_Echoe $1"CFLAGS$4"$CFLAGS >> $5
     $TSC_Echoe $1"GLIBFLAGS$4"$GLIBFLAGS >> $5
     $TSC_Echoe $1"GTKFLAGS$4"$GTKFLAGS >> $5
