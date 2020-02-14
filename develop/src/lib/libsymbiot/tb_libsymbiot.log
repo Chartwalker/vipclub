@@ -1,0 +1,3 @@
+sizeof(data_p->=0xffffee713d98)=8
+sizeof(data_p.tb_fp->=0x1ce022a0)=8
+sizeof(&data_p=0xffffee713da0)=8
