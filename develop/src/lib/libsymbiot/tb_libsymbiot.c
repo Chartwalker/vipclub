@@ -3,15 +3,15 @@
 
 int tb_libsymbiot( Libsymbiot_t *data_p){
     if (data_p) {
-<------>fprintf(data_p->tb_fp,"sizeof(data_p->=%p)=%i\n",data_p, sizeof(data_p));
-<------>fprintf(data_p->tb_fp,"sizeof(data_p.tb_fp->=%p)=%i\n",data_p->tb_fp, sizeof(data_p->tb_fp));
-<------>fprintf(data_p->tb_fp,"sizeof(&data_p=%p)=%i\n",&data_p->tb_fp,sizeof(&data_p->tb_fp));
-    }.
-    else.
+	fprintf(data_p->tb_fp,"sizeof(data_p->=%p)=%i\n",data_p, sizeof(data_p));
+	fprintf(data_p->tb_fp,"sizeof(data_p.tb_fp->=%p)=%i\n",data_p->tb_fp, sizeof(data_p->tb_fp));
+	fprintf(data_p->tb_fp,"sizeof(&data_p=%p)=%i\n",&data_p->tb_fp,sizeof(&data_p->tb_fp));
+    }
+    else
     {
-<------>fprintf(stderr,"\nerror: p->=%p (nil)");
+	fprintf(stderr,"\nerror: p->=%p (nil)");
     };
-....
+
     return 0;
 }
 

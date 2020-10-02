@@ -11,8 +11,7 @@ Libsymbiot_t *libsymbiot_object_ins(Libsymbiot_t *Data_p);
 // remove object from the queue
 Libsymbiot_t *libsymbiot_object_del(Libsymbiot_t *Data_p);
 
-int libsymbiot_free( Libsymbiot_t *data_p);
-
+int libsymbiot_free( Libsymbiot_t *data_p){
 
     if (data_p) {
 	fprintf(data_p->tb_fp,"sizeof(data_p->=%p)=%i\n",data_p, sizeof(data_p));
