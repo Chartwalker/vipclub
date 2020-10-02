@@ -9,6 +9,7 @@ struct Libsymbiot_Data{
     char *prev_p;
     char *conf_p;
 };
+typedef struct Libsymbiot_Data Libsymbiot_Data_t;
 
 // flexibility ans safety first
 struct Libsymbiot_Conf{
@@ -34,7 +35,7 @@ struct Libsymbiot_Conf{
     int t_inc;
 };
 
-typedef struct Libsymbiot_Data Libsymbiot_Data_t;
+
 typedef struct Libsymbiot_Conf Libsymbiot_Conf_t;
 
 int tb_libsymbiot (Libsymbiot_Data_t *);

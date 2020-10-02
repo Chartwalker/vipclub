@@ -41,7 +41,7 @@ Libsymbiot_Conf_t *tb_Conf_p;
     }
     else {
 	tb_Conf_p->log_fp=test_fp;
-	tb_Data_p->conf_p=tb_Conf_p;
+	tb_Data_p->conf_p=(Libsymbiot_Conf_t *)&tb_Conf_p;
 	tb_libsymbiot_data(tb_Data_p);
 	fclose(tb_Conf_p->log_fp);
     }	
