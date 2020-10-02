@@ -11,11 +11,11 @@
  GtkWidget *button;
 
  gint color = 0;
- gint color_max=3;
- gint color_min=1;
+ gint color_max=2;
+ gint color_min=0;
 
 static void cb_print_inc (GtkWidget *widget,gpointer data){
- g_print ("%s=%i image[0]=%p<-%p\n",(char*)data,color,image[0],image[color]);
+ g_print ("%s=image[%i]=%p<-%p\n",(char*)data,color,image[0],image[color]);
  
  if (color<color_max) color++; else color=color_min;
  image[0]=image[color];
@@ -23,7 +23,7 @@ static void cb_print_inc (GtkWidget *widget,gpointer data){
 }
 
 static void cb_print_dec (GtkWidget *widget,gpointer data){
- g_print ("%s=%i image[0]=%p<-%p\n",(char*)data,color,image[0],image[color]);
+ g_print ("%s=image[%i]=%p<-%p\n",(char*)data,color,image[0],image[color]);
 
  if (color>color_min) color--; else color=color_max;
  image[0]=image[color];
@@ -31,7 +31,7 @@ static void cb_print_dec (GtkWidget *widget,gpointer data){
 }
 
 static gboolean cb_expose_event (GtkWidget *widget, GdkEventExpose * event, gpointer data){
- g_print ("%s=%i image[0]=%p<-%p\n",(char*)data,color,image[0],image[color]);
+ g_print ("%s=image[%i]=%p<-%p\n",(char*)data,color,image[0],image[color]);
 
  if (color>color_min) color--; else color=color_max;
  image[0]=image[color];
