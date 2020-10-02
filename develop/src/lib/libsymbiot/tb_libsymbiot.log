@@ -1,3 +1,2 @@
-sizeof(data_p->=0x7ffc0a712b00)=8
-sizeof(data_p.tb_fp->=0x55dad0830010)=8
-sizeof(&data_p=0x7ffc0a712b08)=8
+%p=0x7ffe4ae6d740 Conf_p sz=136
+%p=0x7ffe4ae6d7d0 Data_p sz=40
