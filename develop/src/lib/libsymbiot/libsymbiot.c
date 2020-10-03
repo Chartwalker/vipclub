@@ -1,22 +1,60 @@
-// 13.2.2020 MIT C. by Tarnsat (ukn)
+// 3.10.2020 MIT C. by Tarnsat (ukn)
 #include <libsymbiot/libsymbiot.h>
+
+char *libsymbiot_hexlisting(Libsymbiot_Conf_t *Parent_p, Buffer_t *Buffer){
+	const unsigned char colcount=0x10;
+	short *chr_sh;
+	const unsigned char startcode = 0x3A;
+	unsigned char bcount = 0x0;
+	unsigned short offset = 0x0;
+	unsigned char rtype = 0x0;
+	unsigned long csum;
+	int i,j;
+	static char *ret_val;
+	
+	// for(i=0;j<8;j++){[
+	// for (i=0;i<sizeof(Libsymbiot_Conf_t);i++){
+	
+	/*  only for csum test	
+	csum= 0x3+0x0+0x30+0x0+0x2+0x33+0x7A;
+	csum = ~csum;
+	csum = csum +1;
+	csum &= 0xff;
+	if (Parent_p){
+		fprintf (stderr,"csum=%hx\n",csum);	
+	}
+	*/
+	ret_val = (char *) &Buffer->buf_p;
+	return (ret_val);
+}
 
 // Config Constructor
 Libsymbiot_Conf_t *libsymbiot_conf_new(Libsymbiot_Conf_t *Parent_p){
    // if parent == NULL, then media offline oder Debug 
     static Libsymbiot_Conf_t *Child_p;
 	static char *mem_p;
-	
+	static char *out_p;
+	int i,j;
     mem_p=malloc(sizeof(Libsymbiot_Conf_t));
 	if(mem_p == NULL){
 		fprintf(stderr,"conf_new: unable to get memory at %p",mem_p);
 		return NULL;
     } else {
+	    out_p=mem_p;
+		
 		Child_p= (Libsymbiot_Conf_t *) mem_p;
-		Child_p->Parent_p = (Libsymbiot_Conf_t *) Parent_p;
-		Child_p->log_fp = (Libsymbiot_Conf_t *) Parent_p->log_fp;
-		fprintf(Child_p->log_fp,"conf_new: %%p(Parent_p)=%p sz=%i\n",Parent_p, sizeof(*Parent_p));
-		fprintf(Child_p->log_fp,"conf_new: %%p(Child_p)=%p sz=%i\n",Child_p, sizeof(*Child_p));
+		
+		// only preinit - no deep copy
+//		Child_p->conf_size=sizeof(Libsymbiot_Conf_t);
+		Child_p->Parent_p = Parent_p;
+		//		
+//		BITSET(Child_p->Media_Type, MT_BLANK_E);
+		
+//		Child_p->log_fp = Parent_p->log_fp;
+//		Child_p->conf_fp = Parent_p->conf_fp;
+//		fprintf(Child_p->log_fp,"conf_new: %%p(Parent_p)=%p sz=%i\n",Parent_p, sizeof(*Parent_p));
+//		fprintf(Child_p->log_fp,"conf_new: %%p(Child_p)=%p sz=%i\n",Child_p, sizeof(*Child_p));
+//		BITSET(Child_p->Media_Type, MT_NEW_E);
         return (Libsymbiot_Conf_t *) Child_p;
     }
 }

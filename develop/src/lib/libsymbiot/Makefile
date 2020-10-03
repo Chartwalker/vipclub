@@ -1,6 +1,6 @@
 include ../../../src/config.mk
 
-.PHONY: clean includes libs install test clean
+.PHONY: clean includes libs install test clean doc
 
 all: clean includes libs install
 
@@ -18,7 +18,10 @@ includes:
 	$(TSC_CP) ./bitops.h $(TSC_Incl)/libsymbiot/bitops.h
 
 libs: includes libsymbiot.a
-	$(TSC_CP) libsymbiot.a $(TSC_Libs)/libsymbiot.a 
+	$(TSC_CP) libsymbiot.a $(TSC_Libs)/libsymbiot.a
+
+doc:
+	dot -Tpdf < tb_libsymbiot1.dot  > tb_libsymbiot1.pdf
 
 clean:
 	$(TSC_RM) ./libsymbiot.a

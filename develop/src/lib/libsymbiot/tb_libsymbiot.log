@@ -1,5 +1,4 @@
-main_tb: env: %p(Root_Conf_p)=0x55aef0e210e0  %p(Debug_Conf_p)=(nil)
-main_tb: env: PAGE_SIZE=4041347296, CHAR_BIT=4096
-main_tb: env: %p(Root_p)=0x55aef0e210e0 sz=152
-conf_new: %p(Parent_p)=0x55aef0e210e0 sz=152
-conf_new: %p(Child_p)=0x55aef2473260 sz=152
+main_tb: env: %p(Root_Conf_p)=0x5569871681a0  %p(Debug_Conf_p)=0x556987168360
+main_tb: env: PAGE_SIZE=2266399136, CHAR_BIT=4096
+main_tb: env: %p(Root_p)=0x5569871681a0 sz=168
+main_tb: dot: dot_file=tb_libsymbiot1.dot enabledmain_tb: logtest from Debug_Conf_p at 0x5569878024a0
