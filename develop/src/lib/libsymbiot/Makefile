@@ -26,6 +26,8 @@ doc:
 clean:
 	$(TSC_RM) ./libsymbiot.a
 	$(TSC_RM) ./libsymbiot.o
+	$(TSC_RM) ./tb_libsymbiot
+	$(TSC_RM) ./tb_libsymbiot.log
 	$(TSC_RM) ./tb_libsymbiot1.dot
 	$(TSC_RM) ./tb_libsymbiot1.pdf
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.a
