@@ -1,3 +1,4 @@
+// usefull bitfield standard from clang FAQ
 #incluce <limits.h>
 
 #define BITMASK(b) (1 << ((b) % CHAR_BIT))

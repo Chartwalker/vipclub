@@ -4,7 +4,7 @@
 int tb_libsymbiot_data( Libsymbiot_Data_t *Data_p){
 	Libsymbiot_Conf_t *Conf_p;
 	if (Data_p) {
-        Conf_p=(Libsymbiot_Conf_t *)Data_p->conf_p;
+        Conf_p=(Libsymbiot_Conf_t *)Data_p->Conf_p;
         if (Conf_p) {
 	    fprintf(Conf_p->log_fp,"%%p=%p Conf_p sz=%i\n",Conf_p, sizeof(*Conf_p));
 	    fprintf(Conf_p->log_fp,"%%p=%p Data_p sz=%i\n",Data_p, sizeof(*Data_p));
@@ -24,26 +24,34 @@ int tb_libsymbiot_data( Libsymbiot_Data_t *Data_p){
 
 int main(int argc, char **arv){
 
-FILE *test_fp;
-
-const char *TBLOG = "tb_libsymbiot.log";
-
-Libsymbiot_Data_t *tb_Data_p;
-Libsymbiot_Conf_t *tb_Conf_p;
+	FILE *debug_fp;
+	const char *TBLOG = "tb_libsymbiot.log";
+	// emulating the rest of the system
+	static Libsymbiot_Data_t *Root_Data_p;
+	static Libsymbiot_Conf_t *Root_Conf_p;
+	static Libsymbiot_Data_t *Debug_Data_p;
+	static Libsymbiot_Conf_t *Debug_Conf_p;
+	// static reference
+	static Libsymbiot_Data_t Root_Data;
+	static Libsymbiot_Conf_t Root_Conf;
+	// linking only the root structure
+	Root_Data_p=&Root_Data;
+	Root_Conf_p=&Root_Conf;
 	
-    Libsymbiot_Data_t Tb_Data;
-	Libsymbiot_Conf_t Tb_Conf;
-    tb_Data_p=&Tb_Data;
-    tb_Conf_p=&Tb_Conf;
-	
-    if ((test_fp=fopen(TBLOG,"w+"))==NULL){
-	fprintf(stderr,"unable to open %s",TBLOG);
+	 if ((debug_fp=fopen(TBLOG,"w+"))==NULL){
+		fprintf(stderr,"unable to open %s\n",TBLOG);
     }
     else {
-	tb_Conf_p->log_fp=test_fp;
-	tb_Data_p->conf_p=(Libsymbiot_Conf_t *)&tb_Conf_p;
-	tb_libsymbiot_data(tb_Data_p);
-	fclose(tb_Conf_p->log_fp);
-    }	
+		Root_Conf_p->log_fp=debug_fp;
+		fprintf(Root_Conf_p->log_fp,"tb: %%p=%p Root_p sz=%i\n",Root_Conf_p, sizeof(*Root_Conf_p));
+		}	
+	
+    if ((Debug_Conf_p=libsymbiot_conf_new(Root_Conf_p)) == NULL) {
+		fprintf(stderr,"tb: unable to create Debug_Conf_p at %p\n",Debug_Conf_p);	
+	} else {
+		Debug_Conf_p->log_fp=Root_Conf_p->log_fp;
+		fprintf(stderr,"tb: create Debug_Conf_p at %p\n",Debug_Conf_p);	
+	}			
+	fclose (debug_fp);
     return 0;
 }

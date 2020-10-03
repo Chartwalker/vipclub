@@ -1,16 +1,8 @@
 include ../../../src/config.mk
 
-.PHONY: install libs clean
+.PHONY: clean includes libs install test clean
 
-globincls = libsymbiot.h bitops.h
-cpglobincls = $(foreach globincl,$(globincls),$(TSC_CP) $(globincl) $(TSC_Incl)/libsymbiot/$(globincl))
-rmglobincls = $(foreach globincl,$(globincls),$(TSC_RM) $(TSC_Incl)/libsymbiot/$(globincl))
-
-globlibs = libsymbiot.a 
-cpgloblibs = $(foreach globlib,$(globlibs),$(TSC_CP) $(globlib) $(TSC_Libs)/$(globlib))
-rmgloblibs = $(foreach globlib,$(globlibs),$(TSC_RM) $(globlib) $(TSC_Libs)/$(globlib) )
-
-all: clean libs install
+all: clean includes libs install
 
 libsymbiot.a: libsymbiot.h libsymbiot.c tb_libsymbiot.c
 	$(TSC_CC) -I. -I $(TSC_Incl) -c libsymbiot.c $(CFLAGS)
@@ -19,13 +11,20 @@ libsymbiot.a: libsymbiot.h libsymbiot.c tb_libsymbiot.c
 tb_libsymbiot: libsymbiot.a tb_libsymbiot.c
 	$(TSC_CC) $(CFLAGS) -I. -I $(TSC_Incl) -L $(TSC_Libs)  tb_libsymbiot.c -o tb_libsymbiot -lsymbiot
 
-install: libsymbiot.a tb_libsymbiot
-	$(cpglobincls)
-	$(cpgloblibs)
+install: includes libs test
 
-libs: libsymbiot.a
+includes:
+	$(TSC_CP) ./libsymbiot.h $(TSC_Incl)/libsymbiot/libsymbiot.h
+	$(TSC_CP) ./bitops.h $(TSC_Incl)/libsymbiot/bitops.h
+
+libs: includes libsymbiot.a
 	$(TSC_CP) libsymbiot.a $(TSC_Libs)/libsymbiot.a 
 
 clean:
-	echo $(rmglobincls)
-	echo $(rmgloblibs)
+	$(TSC_RM) ./libsymbiot.a
+	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.a
+	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.h
+	$(TSC_RM) $(TSC_Incl)/libsymbiot/bitops.h
+
+test: tb_libsymbiot
+	./tb_libsymbiot
