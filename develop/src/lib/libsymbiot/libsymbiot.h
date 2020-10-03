@@ -1,5 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+
+// bytes per kernel page
+#ifndef PAGE_SICE
+#define PAGE_SIZE 4096
+#endif
+
+// bit per char
+#ifndef CHAR_BIT
+#define CHAR_BIT 8
+#endif
 
 typedef unsigned long Media_Type_t;
 

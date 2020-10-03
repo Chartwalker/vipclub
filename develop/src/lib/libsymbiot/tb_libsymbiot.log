@@ -1,3 +1,5 @@
-tb: %p=0x55aad78fd0e0 Root_p sz=152
-new: %p=0x55aad78fd0e0 Parent_p sz=152
-new: %p=0x55aad79cd260 Child_p sz=152
+main_tb: env: %p(Root_Conf_p)=0x55aef0e210e0  %p(Debug_Conf_p)=(nil)
+main_tb: env: PAGE_SIZE=4041347296, CHAR_BIT=4096
+main_tb: env: %p(Root_p)=0x55aef0e210e0 sz=152
+conf_new: %p(Parent_p)=0x55aef0e210e0 sz=152
+conf_new: %p(Child_p)=0x55aef2473260 sz=152
