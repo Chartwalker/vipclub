@@ -25,6 +25,9 @@ doc:
 
 clean:
 	$(TSC_RM) ./libsymbiot.a
+	$(TSC_RM) ./libsymbiot.o
+	$(TSC_RM) ./tb_libsymbiot1.dot
+	$(TSC_RM) ./tb_libsymbiot1.pdf
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.a
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.h
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/bitops.h
