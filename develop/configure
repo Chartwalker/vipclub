@@ -30,7 +30,7 @@ TSC_CC=`which gcc`
 TSC_CP=`which cp`
 TSC_RM=`which rm`" -f"
 TSC_RMDIR=`which rmdir`
-TSC_RMIDIR=`which rmdir`"--ignore-fail-on-non-empty"
+TSC_RMDIRI=`which rmdir`" --ignore-fail-on-non-empty"
 TSC_Libs=`pwd`"/lib"
 TSC_Incl=`pwd`"/inc"
 
