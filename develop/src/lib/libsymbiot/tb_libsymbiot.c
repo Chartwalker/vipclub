@@ -89,7 +89,7 @@ int main(int argc, char **arv){
     else {
 		Root_Conf_p->log_fp=debug_fp;
 		fprintf(Root_Conf_p->log_fp,"main_tb: env: %%p(Root_Conf_p)=%p  %%p(Debug_Conf_p)=%p\n",Root_Conf_p, Debug_Conf_p);	
-		fprintf(Root_Conf_p->log_fp,"main_tb: env: PAGE_SIZE=%u, CHAR_BIT=%u\n",Root_Conf_p, PAGE_SIZE, CHAR_BIT);	
+		fprintf(Root_Conf_p->log_fp,"main_tb: env: PAGE_SIZE=%u, CHAR_BIT=%u\n", PAGE_SIZE, CHAR_BIT);	
 		fprintf(Root_Conf_p->log_fp,"main_tb: env: %%p(Root_p)=%p sz=%i\n",Root_Conf_p, sizeof(*Root_Conf_p));
 	}	
 	// create dot for navigation
