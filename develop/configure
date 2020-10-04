@@ -29,6 +29,7 @@ TSC_AR=`which ar`" -rs"
 TSC_CC=`which gcc`
 TSC_CP=`which cp`
 TSC_RM=`which rm`" -f"
+TSC_MKDIR=`which mkdir`
 TSC_RMDIR=`which rmdir`
 TSC_RMDIRI=`which rmdir`" --ignore-fail-on-non-empty"
 TSC_Libs=`pwd`"/lib"
@@ -62,8 +63,9 @@ tsc_write_env(){
     $TSC_Echoe $1"TSC_CC$4"$TSC_CC >> $5
     $TSC_Echoe $1"TSC_CP$4"$TSC_CP >> $5
     $TSC_Echoe $1"TSC_RM$4"$TSC_RM >> $5
+    $TSC_Echoe $1"TSC_MKDIR$4"$TSC_MKDIR >> $5
     $TSC_Echoe $1"TSC_RMDIR$4"$TSC_RMDIR >> $5
-    $TSC_Echoe $1"TSC_RMIDIR$4"$TSC_RMIDIR >> $5
+    $TSC_Echoe $1"TSC_RMDIRI$4"$TSC_RMDIRI >> $5
     $TSC_Echoe $1"TSC_AR$4"$TSC_AR >> $5
     $TSC_Echoe $1"CFLAGS$4"$CFLAGS >> $5
     $TSC_Echoe $1"GLIBFLAGS$4"$GLIBFLAGS >> $5
