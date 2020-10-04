@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <string.h>
 #include <libsymbiot/bitops.h>
 
 // bytes per kernel page
@@ -20,11 +21,11 @@ enum Media_Type_E{
 };
 
 struct Buffer_S {
-	void *buf_p;
-	void *len_p;	
-	void *start_p;
-	void *end_p;
+	char *buf_p;
 	int inc;
+	char *start_p;
+	char *end_p;
+	char sentinel;
 };
 	
 typedef struct Buffer_S Buffer_t;
@@ -33,9 +34,9 @@ typedef struct Buffer_S Buffer_t;
 struct Libsymbiot_Conf{
     int conf_size;
     void *Parent_p;
-    char Media_Type[BITNSLOTS(MT_MAX_SIZE_E)] ;
     struct Libsymbiot_Data * Data_p;
     struct Libsymbiot_Data * Dot_p;	
+    Buffer_t *Buffer_p;
     FILE *log_fp;
     FILE *conf_fp;
     FILE *dot_fp;
@@ -76,5 +77,4 @@ Libsymbiot_Data_t *libsymbiot_data_new(Libsymbiot_Data_t *Parent_p);
 Libsymbiot_Data_t *libsymbiot_data_free( Libsymbiot_Data_t *Parent_p);
 Libsymbiot_Data_t *libsymbiot_data_object_ins(Libsymbiot_Data_t *Parent_p);
 Libsymbiot_Data_t *libsymbiot_data_object_del(Libsymbiot_Data_t *Parent_p);
-
-char *libsymbiot_hexlisting(Libsymbiot_Conf_t *Parent_p, Buffer_t *Buffer);
+Libsymbiot_Conf_t *libsymbiot_intelhex(Libsymbiot_Conf_t *Parent_p);

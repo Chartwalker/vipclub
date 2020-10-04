@@ -1,7 +1,9 @@
 // 3.10.2020 MIT C. by Tarnsat (ukn)
 #include <libsymbiot/libsymbiot.h>
 
-char *libsymbiot_hexlisting(Libsymbiot_Conf_t *Parent_p, Buffer_t *Buffer){
+Libsymbiot_Conf_t *libsymbiot_intelhex(Libsymbiot_Conf_t *Parent_p){
+	static char *malloc_p=NULL;
+	static Buffer_t *Buffer_p;
 	const unsigned char colcount=0x10;
 	short *chr_sh;
 	const unsigned char startcode = 0x3A;
@@ -10,8 +12,27 @@ char *libsymbiot_hexlisting(Libsymbiot_Conf_t *Parent_p, Buffer_t *Buffer){
 	unsigned char rtype = 0x0;
 	unsigned long csum;
 	int i,j;
-	static char *ret_val;
 	
+	malloc_p=(char *)malloc(sizeof(PAGE_SIZE));
+	
+	if(malloc_p == NULL){
+		fprintf(stderr,"conf_new: unable to get memory at %p\n",malloc_p);
+		return NULL;
+    } else {
+			// make sure tile is really clean
+			memset(malloc_p, 0, PAGE_SIZE);
+			if (Parent_p){
+				Buffer_p=(Buffer_t *)malloc_p;	// struct is a part of PAGE_SIZE
+				Buffer_p->start_p= (char *) &Buffer_p->sentinel + 1;	
+				Buffer_p->buf_p=Buffer_p->start_p;
+				Buffer_p->end_p=(char *) Buffer_p + PAGE_SIZE - 1;
+				Parent_p->Buffer_p=Buffer_p;
+				fprintf(Parent_p->log_fp,"intelhex: creating %%p(Buf_p)=%p and linking to %%p(Parent_p)=%p\n",Parent_p->Buffer_p,Parent_p);	
+				fprintf(Parent_p->log_fp,"intelhex: at %%p(Buf_p)=%p offset=%u with start=%p end=%p size=%u\n",Buffer_p->buf_p,(char *)Buffer_p->start_p-((char *)Parent_p->Buffer_p),Buffer_p->start_p,Buffer_p->end_p,Buffer_p->end_p-Buffer_p->start_p);	
+			} else {
+				fprintf(stderr,"intelhex: unable to linking %%p(Buf_p)=%p to Parent_p=%p\n",Buffer_p,Parent_p);
+			}	
+	}	
 	// for(i=0;j<8;j++){[
 	// for (i=0;i<sizeof(Libsymbiot_Conf_t);i++){
 	
@@ -24,8 +45,7 @@ char *libsymbiot_hexlisting(Libsymbiot_Conf_t *Parent_p, Buffer_t *Buffer){
 		fprintf (stderr,"csum=%hx\n",csum);	
 	}
 	*/
-	ret_val = (char *) &Buffer->buf_p;
-	return (ret_val);
+	return Parent_p;
 }
 
 // Config Constructor

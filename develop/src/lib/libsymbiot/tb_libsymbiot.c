@@ -111,7 +111,8 @@ int main(int argc, char **arv){
 		tb_libsymbiot_dot( Debug_Conf_p);
 //		fprintf(Debug_Conf_p->dot_fp,"\tstruct1 [share=record,label=\"<f0>| %%p(Root_p)=\n%p|<f1>%%p(Config_p)=\n%p | %%p(Dot_p)=\n%p\"];",);
 	}			
-	retval_s=libsymbiot_hexlisting(Root_Conf_p,&Buffer);
+	fprintf(Root_Conf_p->log_fp,"main_tb: try to create intelhex from %%p(Root_p)=%p\n",Root_Conf_p);
+	libsymbiot_intelhex(Root_Conf_p);
 	fclose (debug_fp);
 	fclose (dot_fp);
     return 0;
