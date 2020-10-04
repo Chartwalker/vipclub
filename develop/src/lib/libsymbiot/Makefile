@@ -2,7 +2,7 @@ include ../../../src/config.mk
 
 .PHONY: clean includes libs install test clean doc
 
-all: clean includes libs install
+all: clean includes libs install doc
 
 libsymbiot.a: libsymbiot.h libsymbiot.c tb_libsymbiot.c
 	$(TSC_CC) -I. -I $(TSC_Incl) -c libsymbiot.c $(CFLAGS)
@@ -14,6 +14,7 @@ tb_libsymbiot: libsymbiot.a tb_libsymbiot.c
 install: includes libs test
 
 includes:
+	$(TSC_MKDIR) $(TSC_Incl)/libsymbiot/
 	$(TSC_CP) ./libsymbiot.h $(TSC_Incl)/libsymbiot/libsymbiot.h
 	$(TSC_CP) ./bitops.h $(TSC_Incl)/libsymbiot/bitops.h
 
@@ -30,9 +31,11 @@ clean:
 	$(TSC_RM) ./tb_libsymbiot.log
 	$(TSC_RM) ./tb_libsymbiot1.dot
 	$(TSC_RM) ./tb_libsymbiot1.pdf
-	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.a
+	$(TSC_RM) $(TSC_Libs)/libsymbiot.a
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.h
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/bitops.h
+	$(TSC_RMDIRI) $(TSC_Incl)/libsymbiot/
+	
 
 test: tb_libsymbiot
 	./tb_libsymbiot
