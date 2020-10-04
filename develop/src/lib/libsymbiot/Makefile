@@ -2,7 +2,7 @@ include ../../../src/config.mk
 
 .PHONY: config clean includes libs install test doc
 
-all: config clean includes libs install doc
+all: clean includes libs install doc
 
 libsymbiot.a: libsymbiot.h libsymbiot.c tb_libsymbiot.c
 	$(TSC_CC) -I. -I $(TSC_Incl) -c libsymbiot.c $(CFLAGS)

@@ -52,6 +52,10 @@ struct Libsymbiot_Conf{
     int data_inc;
     int log_inc;
     int conf_inc;
+	int x_lay;
+	int y_lay;
+	int z_iay;	
+	int t_lay;	
     int x_inc;
     int y_inc;
     int z_inc;
