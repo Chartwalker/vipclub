@@ -2,20 +2,16 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
+#include <libsymbiot/config.h>
 #include <libsymbiot/bitops.h>
 
-#ifdef TSC_DEBUG_LIBSYMBIOT
-#define debug_print(fmt, ...) fprintf(stderr, fmt, ##__VA_ARGS__)
+#ifdef TSC_DEBUG
+#define debug_print(fmt, ...) \
+			do { if (TSC_DEBUG) fprintf(dbg_fp, "%s:%d:%s(): " fmt, __FILE__, \
+			__LINE__, __func__, __VA_ARGS__); } while (0)
 #else
 #define debug_print(fmt, ...) do {} while (0)
 #endif
-
-#ifdef FDEBUG
-#define fdebug_print(fmt, ...) fprintf(dbg_dp, fmt, ##__VA_ARGS__)
-#else
-#define fdebug_print(fmt, ...) do {} while (0)
-#endif
-
 
 // bytes per kernel page
 #ifndef PAGE_SIZE
@@ -50,10 +46,11 @@ struct Libsymbiot_Conf{
     struct Libsymbiot_Data * Data_p;
     struct Libsymbiot_Data * Dot_p;	
     Buffer_t *Buffer_p;
-    FILE *log_fp;
-	FILE *dbg_fp;
-    FILE *conf_fp;
-    FILE *dot_fp;
+	FILE *dbg_fp;	// debug
+    FILE *log_fp;		// loging normal purpose
+    FILE *dot_fp;	// dot-File for html
+	FILE *html_fp;	// html-file for browsing
+	FILE *conf_fp;	// serialize config to have persistence on shutdown
     struct Libsymbiot_Conf *Xup_p;
     struct Libsymbiot_Conf *Xdn_p;
     struct Libsymbiot_Conf *Yup_p;
