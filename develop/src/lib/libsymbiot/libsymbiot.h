@@ -4,6 +4,19 @@
 #include <string.h>
 #include <libsymbiot/bitops.h>
 
+#ifdef TSC_DEBUG_LIBSYMBIOT
+#define debug_print(fmt, ...) fprintf(stderr, fmt, ##__VA_ARGS__)
+#else
+#define debug_print(fmt, ...) do {} while (0)
+#endif
+
+#ifdef FDEBUG
+#define fdebug_print(fmt, ...) fprintf(dbg_dp, fmt, ##__VA_ARGS__)
+#else
+#define fdebug_print(fmt, ...) do {} while (0)
+#endif
+
+
 // bytes per kernel page
 #ifndef PAGE_SIZE
 #define PAGE_SIZE 4096
@@ -38,6 +51,7 @@ struct Libsymbiot_Conf{
     struct Libsymbiot_Data * Dot_p;	
     Buffer_t *Buffer_p;
     FILE *log_fp;
+	FILE *dbg_fp;
     FILE *conf_fp;
     FILE *dot_fp;
     struct Libsymbiot_Conf *Xup_p;

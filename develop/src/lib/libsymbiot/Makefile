@@ -22,15 +22,16 @@ libs: includes libsymbiot.a
 	$(TSC_CP) libsymbiot.a $(TSC_Libs)/libsymbiot.a
 
 doc:
-	dot -Tpdf < tb_libsymbiot1.dot  > tb_libsymbiot1.pdf
+	dot -Tpdf < tb_libsymbiot.dot  > tb_libsymbiot_dot.pdf
 
 clean:
 	$(TSC_RM) ./libsymbiot.a
 	$(TSC_RM) ./libsymbiot.o
 	$(TSC_RM) ./tb_libsymbiot
-	$(TSC_RM) ./tb_libsymbiot.log
-	$(TSC_RM) ./tb_libsymbiot1.dot
-	$(TSC_RM) ./tb_libsymbiot1.pdf
+	$(TSC_RM) ./tb_libsymbiot_log.txt
+	$(TSC_RM) ./tb_libsymbiot_dbg.txt
+	$(TSC_RM) ./tb_libsymbiot.dot
+	$(TSC_RM) ./tb_libsymbiot_dot.pdf
 	$(TSC_RM) $(TSC_Libs)/libsymbiot.a
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.h
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/bitops.h

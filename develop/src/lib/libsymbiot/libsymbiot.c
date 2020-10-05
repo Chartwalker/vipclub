@@ -16,7 +16,7 @@ Libsymbiot_Conf_t *libsymbiot_intelhex(Libsymbiot_Conf_t *Parent_p){
 	malloc_p=(char *)malloc(sizeof(PAGE_SIZE));
 	
 	if(malloc_p == NULL){
-		fprintf(stderr,"conf_new: unable to get memory at %p\n",malloc_p);
+		fprintf(stderr,"iot_ihex: unable to get memory at %p\n",malloc_p);
 		return NULL;
     } else {
 			// make sure tile is really clean
@@ -27,10 +27,10 @@ Libsymbiot_Conf_t *libsymbiot_intelhex(Libsymbiot_Conf_t *Parent_p){
 				Buffer_p->buf_p=Buffer_p->start_p;
 				Buffer_p->end_p=(char *) Buffer_p + PAGE_SIZE - 1;
 				Parent_p->Buffer_p=Buffer_p;
-				fprintf(Parent_p->log_fp,"intelhex: creating %%p(Buf_p)=%p and linking to %%p(Parent_p)=%p\n",Parent_p->Buffer_p,Parent_p);	
-				fprintf(Parent_p->log_fp,"intelhex: at %%p(Buf_p)=%p offset=%u with start=%p end=%p size=%u\n",Buffer_p->buf_p,(char *)Buffer_p->start_p-((char *)Parent_p->Buffer_p),Buffer_p->start_p,Buffer_p->end_p,Buffer_p->end_p-Buffer_p->start_p);	
+				fprintf(Parent_p->log_fp,"iot_ihex: creating %%p(Buf_p)=%p and linking to %%p(Parent_p)=%p\n",Parent_p->Buffer_p,Parent_p);	
+				fprintf(Parent_p->log_fp,"iot_ihex: at %%p(Buf_p)=%p offset=%u with start=%p end=%p size=%u\n",Buffer_p->buf_p,(char *)Buffer_p->start_p-((char *)Parent_p->Buffer_p),Buffer_p->start_p,Buffer_p->end_p,Buffer_p->end_p-Buffer_p->start_p);	
 			} else {
-				fprintf(stderr,"intelhex: unable to linking %%p(Buf_p)=%p to Parent_p=%p\n",Buffer_p,Parent_p);
+				fprintf(stderr,"iot_ihex: unable to linking %%p(Buf_p)=%p to Parent_p=%p\n",Buffer_p,Parent_p);
 			}	
 	}	
 	// for(i=0;j<8;j++){[
@@ -57,7 +57,7 @@ Libsymbiot_Conf_t *libsymbiot_conf_new(Libsymbiot_Conf_t *Parent_p){
 	int i,j;
     mem_p=malloc(sizeof(Libsymbiot_Conf_t));
 	if(mem_p == NULL){
-		fprintf(stderr,"conf_new: unable to get memory at %p",mem_p);
+		fprintf(stderr,"iot_conf_new: unable to get memory at %p",mem_p);
 		return NULL;
     } else {
 	    out_p=mem_p;
@@ -89,24 +89,24 @@ Libsymbiot_Conf_t *libsymbiot_conf_free( Libsymbiot_Conf_t *Child_p){
 	
     if (Conf_p) {
 		if (Conf_p->log_fp){
-			fprintf(Conf_p->log_fp,"conf_free: %%p(Conf_p)=%p  sz=%i\n",Conf_p, sizeof(*Conf_p));
+			fprintf(Conf_p->log_fp,"iot_conf_free: %%p(Conf_p)=%p  sz=%i\n",Conf_p, sizeof(*Conf_p));
 	    }	
 		else {
-			fprintf(stderr,"conf_free: unable to get log_fp at %p\n",Conf_p);
+			fprintf(stderr,"iot_conf_free: unable to get log_fp at %p\n",Conf_p);
 		}
 		// step uo	
 		Parent_p=(Libsymbiot_Conf_t *)Conf_p->Parent_p;
         if (Parent_p) {
-			fprintf(Parent_p->log_fp,"conf_free: %%p(Parent Conf_p)=%p  sz=%i\n",Parent_p, sizeof(*Parent_p));
+			fprintf(Parent_p->log_fp,"iot_conf_free: %%p(Parent Conf_p)=%p  sz=%i\n",Parent_p, sizeof(*Parent_p));
 		}
 		else
 		{    
-			fprintf(stderr,"conf_free: error: %%p(Parent Conf_p)=%p (invalid)\n",Parent_p);
+			fprintf(stderr,"iot_conf_free: error: %%p(Parent Conf_p)=%p (invalid)\n",Parent_p);
 		}
     } 
     else 
     {
-	fprintf(stderr,"conf_free: error: %%P(Parent Conf_p)=%p (invalid)\n",Conf_p);
+	fprintf(stderr,"iot_conf_free: error: %%P(Parent Conf_p)=%p (invalid)\n",Conf_p);
     };
     
     return Parent_p;
