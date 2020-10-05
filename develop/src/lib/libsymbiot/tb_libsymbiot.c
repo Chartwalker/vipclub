@@ -48,10 +48,11 @@ int tb_libsymbiot_dot( Libsymbiot_Conf_t *Dot_p){
 
 int main(int argc, char **arv){
 
+	FILE *dbg_fp;	// debug-file
 	FILE *log_fp;		// regular log	
 	FILE *dot_fp;	//	dot-file
 	FILE *html_fp;	// html-file
-	FILE *dbg_fp;	// debug-file
+	FILE *conf_fp;	// config-file
 	
 	static int *retval_i;
 	static char *retval_s;
@@ -62,6 +63,7 @@ int main(int argc, char **arv){
 	const char *TBLOG = "tb_libsymbiot_log.txt";
 	const char *TBDOT = "tb_libsymbiot.dot";
 	const char *TBHTML = "tb_libsymbiot.html";
+	const char *TBCONF = "tb_libsymbiot.json";
 	
 	// emulating the root tree of the system
 	static Libsymbiot_Data_t *Root_Data_p;
@@ -88,19 +90,53 @@ int main(int argc, char **arv){
 	Debug_Conf_p=&Debug_Conf;
 	Debug_Conf_p=&Debug_Dot;
 	Buffer.buf_p=hexbuf;
-
+	
+	// make Root_p only - copy later
+	// create frist dbg-file to see if some go wrong
+	if ((dbg_fp=fopen(TBDBG,"w+"))==NULL){
+		fprintf(stderr,"tb_main: unable to open %s\n",TBDBG);
+    }
+    else {
+		Root_Conf_p->dbg_fp=dbg_fp;
+		debug_print("dbg_file=%s enabled\n",TBDBG);	
+	}
 	// create log-file for regular purpose
-	 if ((log_fp=fopen(TBLOG,"w+"))==NULL){
-		fprintf(stderr,"main_tb: unable to open %s\n",TBLOG);
+	if ((log_fp=fopen(TBLOG,"w+"))==NULL){
+		debug_print("unable to open %s\n",TBLOG);
     }
     else {
 		Root_Conf_p->log_fp=log_fp;
-		Debug_Conf_p->log_fp=log_fp;
-		fprintf(Root_Conf_p->log_fp,"tb_main: log_file=%s enabled\n",TBLOG);
-		fprintf(Root_Conf_p->log_fp, "tb_main: log(root)  %%p(Root_Conf_p)=%p sz=%i\n",Root_Conf_p,sizeof(*Root_Conf_p)); 
-		fprintf(Debug_Conf_p->log_fp,"tb_main: log(debug) %%p(Debug_Conf_p)=%p sz=%i\n",Debug_Conf_p,sizeof(*Debug_Conf_p));	
-		fprintf(Root_Conf_p->log_fp,"tb_main: env: PAGE_SIZE=%u, CHAR_BIT=%u\n", PAGE_SIZE, CHAR_BIT);	
+		debug_print("log_file=%s enabled\n",TBLOG);	
+	}
+	// create dot-file for html use
+	if ((dot_fp=fopen(TBDOT,"w+"))==NULL){
+		debug_print("unable to open %s\n",TBDOT);
+    }
+    else {
+		Root_Conf_p->dot_fp=dot_fp;
+		debug_print("dot_file=%s enabled\n",TBDOT);	
+	}
+	// create html-file for html browsing
+	if ((html_fp=fopen(TBHTML,"w+"))==NULL){
+		debug_print("unable to open %s\n",TBHTML);
+    }
+    else {
+		Root_Conf_p->html_fp=html_fp;
+		debug_print("html_file=%s enabled\n",TBHTML);	
+	}
+	// create conf-file for json browsing
+	if ((conf_fp=fopen(TBCONF,"w+"))==NULL){
+		debug_print("unable to open %s\n",TBCONF);
+    }
+    else {
+		Root_Conf_p->conf_fp=conf_fp;
+		debug_print("conf_file=%s enabled\n",TBCONF);	
 	}	
+	
+	//	fprintf(Root_Conf_p->log_fp, "tb_main: log(root)  %%p(Root_Conf_p)=%p sz=%i\n",Root_Conf_p,sizeof(*Root_Conf_p)); 
+	//	fprintf(Root_Conf_p->log_fp,"tb_main: env: PAGE_SIZE=%u, CHAR_BIT=%u\n", PAGE_SIZE, CHAR_BIT);	
+	//}	
+	
 	// create dot-grafic for html-use
 	 if ((dot_fp=fopen(TBDOT,"w+"))==NULL){
 		fprintf(stderr,"tb_main: unable to open %s\n",TBDOT);
@@ -124,6 +160,8 @@ int main(int argc, char **arv){
 	fprintf(Root_Conf_p->log_fp,"\ntb_main: try intelhex(Root_Conf_p)=%p\n",Root_Conf_p);
 	libsymbiot_intelhex(Root_Conf_p);
 	fclose (log_fp);
-	fclose (dot_fp);
+//	fclose (dot_fp);
+	fclose (dbg_fp);
+//	fclose (html_fp);
     return 0;
 }

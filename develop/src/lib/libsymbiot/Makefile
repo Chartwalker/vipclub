@@ -17,6 +17,8 @@ includes:
 	$(TSC_MKDIR) $(TSC_Incl)/libsymbiot/
 	$(TSC_CP) ./libsymbiot.h $(TSC_Incl)/libsymbiot/libsymbiot.h
 	$(TSC_CP) ./bitops.h $(TSC_Incl)/libsymbiot/bitops.h
+	$(TSC_CP) $(TSC_H) $(TSC_Incl)/libsymbiot/
+	$(TSC_CP) $(TSC_CMK) $(TSC_Incl)/libsymbiot/
 
 libs: includes libsymbiot.a
 	$(TSC_CP) libsymbiot.a $(TSC_Libs)/libsymbiot.a
@@ -35,6 +37,8 @@ clean:
 	$(TSC_RM) $(TSC_Libs)/libsymbiot.a
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/libsymbiot.h
 	$(TSC_RM) $(TSC_Incl)/libsymbiot/bitops.h
+	$(TSC_RM) $(TSC_Incl)/libsymbiot/config.h
+	$(TSC_RM) $(TSC_Incl)/libsymbiot/config.mk
 	$(TSC_RMDIRI) $(TSC_Incl)/libsymbiot/
 	
 
