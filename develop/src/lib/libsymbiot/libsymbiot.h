@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <time.h>
 #include <string.h>
-#include <libsymbiot/config.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <libsymbiot/bitops.h>
+
+#include <glib/gstdio.h>
+#include <glib/gprintf.h>
+#include <gio/gio.h>
+#include <gtk/gtk.h>
 
 #ifdef TSC_DEBUG
 #define debug_print(fmt, ...) \
@@ -23,6 +32,9 @@
 #define CHAR_BIT 8
 #endif
 
+#ifndef LIBSYMBIOT_H
+#define LIBSYMBIOT_H
+
 enum Media_Type_E{
     MT_BLANK_E,
     MT_NEW_E,
@@ -37,6 +49,8 @@ struct Buffer_S {
 	char sentinel;
 };
 	
+
+
 typedef struct Buffer_S Buffer_t;
 
 // flexibility ans safety first
@@ -93,3 +107,51 @@ Libsymbiot_Data_t *libsymbiot_data_free( Libsymbiot_Data_t *Parent_p);
 Libsymbiot_Data_t *libsymbiot_data_object_ins(Libsymbiot_Data_t *Parent_p);
 Libsymbiot_Data_t *libsymbiot_data_object_del(Libsymbiot_Data_t *Parent_p);
 Libsymbiot_Conf_t *libsymbiot_intelhex(Libsymbiot_Conf_t *Parent_p);
+
+typedef struct Main_Init{
+	// the environment
+	GString *Dir_Home_gsp;
+	GString *Dir_Config_gsp;
+	GString *Dir_Cwd_gsp;			// current working dir - do init before first calling !!
+	GString *Dir_Prg_gsp;			// starting working dir - do init before first calling !!
+	GString *Dir_Log_gsp;
+	GString *Dir_Setup_gsp;
+
+	GString *Dbg_D;					// Debug Domain
+	GString *Dbg_M;					// Debug message
+	// the logical app
+	GString *App_Name_gsp;
+	// the physical app
+	GString *Prg_Pwd_gsp;
+	GString *Prg_Name_gsp;
+	// the current operator
+	GString *User_Name_gsp;
+	GString *Asc_Time; 
+	time_t rawtime;
+	struct tm *time_now;
+	gulong uptime;
+	//
+	// int (*function)();
+	
+	GList *schedule_top;
+	GList *schedule_bottom;
+	GList *schedule_slot[6];
+	GList *schedule_priorty[10];
+	
+	//
+	// the stream handles
+	FILE *err_fp;		// error-file		// do init before first calling !!
+	FILE *dbg_fp;	// debug-file	// do init before first calling !!
+	FILE *log_fp;		// regular log
+	FILE *dot_fp;	// dot-file
+	FILE *html_fp;	// html-file
+	FILE *conf_fp;	// config-file
+	FILE *cb_fp;		// callback-file
+	gint dbg_i;								// Debug Indent
+} Main_Init_t;
+
+FILE *libsymbiot_file_open(Main_Init_t *Main_Init, const char* file_fn, const char *file_fm);
+
+//ifndef LIBSYMBIOT_H
+#endif
+

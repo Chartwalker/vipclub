@@ -1,6 +1,21 @@
 // 3.10.2020 MIT C. by Tarnsat (ukn)
 #include <libsymbiot/libsymbiot.h>
 
+FILE *libsymbiot_file_open(Main_Init_t *Main_Init_p, const char* file_fn, const char *file_fm){
+  // create file_fp
+	static FILE *temp_fp;
+	char *Dbg_s;
+   //	Main_Init_p->Dbg_D = g_string_new((const char*) "  symbiot: fopen(): ");	
+  
+	if ((temp_fp=fopen(file_fn,file_fm))==NULL){
+		if (Main_Init_p->err_fp) {fprintf(Main_Init_p->err_fp,"\n%sunable to fopen(%s,%s) - Error!\n",file_fn, file_fm);}
+    }
+    else {
+		if (Main_Init_p->log_fp) {fprintf(Main_Init_p->log_fp,"\n%sfopen(%s,%s) - successfull\n",file_fn, file_fm);}
+    }
+	return temp_fp;
+}
+
 Libsymbiot_Conf_t *libsymbiot_intelhex(Libsymbiot_Conf_t *Parent_p){
 	static char *malloc_p=NULL;
 	static Buffer_t *Buffer_p;
