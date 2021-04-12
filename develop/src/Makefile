@@ -2,7 +2,7 @@ include ./config.mk
 
 .PHONY: includes libs clean
 
-all:
+all: clean includes libs doc test
 	make -C ./lib/libsymbiot/ all
 
 includes:
@@ -13,9 +13,11 @@ libs:
 
 clean:
 	make -C ./lib/libsymbiot/ clean
+	make -C ../develdoc/ clean
 
 doc:
 	make -C ./lib/libsymbiot/ doc
+	make -C ../develdoc/ doc
 
 test:
 	make -C ./lib/libsymbiot/ test
