@@ -1,24 +1,35 @@
 include ./config.mk
 
-.PHONY: includes libs clean
+.PHONY: $(TSC_PRJG_PHONY)
 
-all: clean includes libs doc test
-	make -C ./lib/libsymbiot/ all
+TARGETS=$(TSC_PRJG_TARGETS)
+
+all: clean includes libs guis docs tests
+	#make -C ./lib/libsymbiot/ all
 
 includes:
-	make -C ./lib/libsymbiot/ includes
+	#make -C includes
+
+clis:
+	#make -C ./gui clis
+
+guis:
+	#make -C ./gui guis
+
+cgis:
+	#make -C ./cgi cgis
 
 libs:
-	make -C ./lib/libsymbiot/ libs
+	#make -C ./lib libs
 
 clean:
-	make -C ./lib/libsymbiot/ clean
-	make -C ../develdoc/ clean
+	#make -C ./lib/libsymbiot/ clean
+	#make -C ../develdoc/ clean
 
-doc:
-	make -C ./lib/libsymbiot/ doc
-	make -C ../develdoc/ doc
+docs:
+	#make -C ./lib/libsymbiot/ docs
+	#make -C ../develdoc/ docs
 
-test:
-	make -C ./lib/libsymbiot/ test
+tests:
+	#make -C ./lib/libsymbiot/ tests
 
