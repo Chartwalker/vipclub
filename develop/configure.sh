@@ -32,7 +32,7 @@ TSC_PRJG_MAJOR="0"
 TSC_PRJG_MINOR="1"
 TSC_PRJG_RELEASE="1"
 TSC_PRJG_PATCH="3"
-TSC_PRJG_PHONY="all cgis clean clis config distclean distrib docs includes guis libs tests"
+TSC_PRJG_PHONY="all cgis clean clis config distclean distrib docs includes install guis libs tests"
 TSC_PRJG_TARGET="vipclub vipclub_tb vipclub_dbg vipclub_gui vipclub_gui_tb vipclub_gui_dbg"
 
 TSC_PRJG_VERSION=$TSC_PRJG_FNAME-$TSC_PRJG_MAJOR.$TSC_PRJG_MINOR.$TSC_PRJG_RELEASE-$TSC_PRJG_PATCH
