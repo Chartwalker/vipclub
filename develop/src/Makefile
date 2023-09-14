@@ -10,7 +10,7 @@ all: clean includes libs guis docs tests
 includes:
 	$(TSC_SBP_ECHOE) make $(TSC_CDPA_INCL)
 	$(TSC_SBP_MKDIRI) $(TSC_CDPA_INCL)/$(TSC_PRJG_FNAME)/$(TSC_CDN_GUI)
-	$(TSC_SBP_CP) $(TSC_CDPA_GUI)/vipclub-gui.h  $(TSC_CDPA_INCL)/$(TSC_PRJG_FNAME)/$(TSC_CDN_GUI)/vipclub-gui.h
+	$(TSC_SBP_CP) $(TSC_CDPA_GUI)/vipclub-gui.h  $(TSC_CDPA_INCL)/$(TSC_PRJG_FNAME)/vipclub-gui.h
 
 clis:
 	#make -C ./gui clis
