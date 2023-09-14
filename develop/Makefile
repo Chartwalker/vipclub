@@ -2,33 +2,35 @@ include src/config.mk
 
 .PHONY: all cgis clean clis distclean distrib docs includes guis libs tests
 
-all: ;
+all: config
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src all
+
+cgis:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src cgis
+
+clean:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src clean
+
+config:
 	./configure.sh
-	make -isC ./src all
 
-cgis: ;
-	make -isC ./src cgis
+distclean:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src distclean
 
-clean: ;
-	make -isC ./src clean
-
-distclean: ;
-	make -isC ./src distclean
-
-distrib: ;
-	make -isC ./src distrib
+distrib:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src distrib
 
 docs: ;
-	make -isC ./src docs
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src docs
 
-includes: ;
-	make -isC ./src includes
+includes:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src includes
 
-guis: ;
-	make -isC ./src guis
+guis:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src guis
 
-libs: ;
-	make -isC ./src libs
+libs:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src libs
 
-tests: ;
-	make -isC ./src tests
+tests:
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKI) ./src tests
