@@ -146,8 +146,11 @@ TSC_SBP_MKDIRI=`which mkdir`" -p"
 TSC_SBP_RM=`which rm`" -f"
 TSC_SBP_RMDIR=`which rmdir`
 TSC_SBP_RMDIRI=`which rmdir`" --ignore-fail-on-non-empty"
-TSC_SBP_MKSILENT=
-#TSC_SBP_MKSILENT=@
+#
+# switch with uncomment as needed - see command or not
+#TSC_SBP_MKSILENT=
+TSC_SBP_MKSILENT=@
+#
 TSC_SBP_YACC=$TSC_SBP_BISON
 
 # linker and compiler flags
