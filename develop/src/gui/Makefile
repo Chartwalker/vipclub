@@ -1,17 +1,17 @@
-include ../src/config.mk
+include ../config.mk
 
-.PHONY: libs includes
+.PHONY: $(TSC_PRJG_PHONY)
 
 all: includes libs vipclub
 
 includes:
-	make -C ../src includes
+	$(TSC_SBP_SILENTMK)$(TSC_SBP_ECHOE) $(TSC_SBP_MKI) ../src includes
 
 libs:
-	make -C ../src libs
+	$(TSC_SBP_SILENTMK)$(TSC_SBP_ECHOE) $(TSC_SBP_MKI) ../src libs
 
 vipclub: libs includes vipclub-gui.h vipclub-gui.c vipclub-gui.xml
-	$(TSC_CC) $(CFLAGS) -I. -I $(TSC_Incl) -D _GNU_SOURCE -L ../lib vipclub-gui.c -o vipclub -rdynamic -lsymbiot $(GLIBFLAGS) $(GTKFLAGS)
+	$(TSC_SBP_CC) $(CFLAGS_GLIB) $(CLFAGS_GTK) -D _GNU_SOURCE vipclub-gui.c -o vipclub-gui -rdynamic -lsymbiot $(LIBS_GLIB) $(GTKFLAGS)
 
 clean:
 	rm -f vipclub

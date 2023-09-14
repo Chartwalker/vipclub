@@ -6,8 +6,8 @@ int tb_libsymbiot_data( Libsymbiot_Data_t *Data_p){
 	if (Data_p) {
         Conf_p=(Libsymbiot_Conf_t *)Data_p->Conf_p;
         if (Conf_p) {
-	    fprintf(Conf_p->log_fp,"%%p=%p Conf_p sz=%i\n",Conf_p, sizeof(*Conf_p));
-	    fprintf(Conf_p->log_fp,"%%p=%p Data_p sz=%i\n",Data_p, sizeof(*Data_p));
+	    fprintf(Conf_p->log_fp,"%%p=%p Conf_p sz=%lu\n",Conf_p, sizeof(*Conf_p));
+	    fprintf(Conf_p->log_fp,"%%p=%p Data_p sz=%lu\n",Data_p, sizeof(*Data_p));
 	}
 	else
 	{    
@@ -54,10 +54,10 @@ int main(int argc, char **arv){
     FILE *html_fp;	// html-file
     FILE *conf_fp;	// config-file
 
-    static int *retval_i;
-    static char *retval_s;
-    Buffer_t Buffer;
-    char hexbuf[PAGE_SIZE];
+    // static int *retval_i;
+    // static char *retval_s;
+    // Buffer_t Buffer;
+    // char hexbuf[PAGE_SIZE];
 
     const char *TBDBG = "tb_libsymbiot_dbg.txt";
     const char *TBLOG = "tb_libsymbiot_log.txt";
@@ -66,31 +66,31 @@ int main(int argc, char **arv){
     const char *TBCONF = "tb_libsymbiot.json";
 
     // emulating the root tree of the system
-    static Libsymbiot_Data_t *Root_Data_p;
-    static Libsymbiot_Conf_t *Root_Dot_p;
+    // static Libsymbiot_Data_t *Root_Data_p;
+    // static Libsymbiot_Conf_t *Root_Dot_p;
     static Libsymbiot_Conf_t *Root_Conf_p;
     
     // static reference
-    static Libsymbiot_Data_t Root_Data;
-    static Libsymbiot_Conf_t Root_Dot;
+    // static Libsymbiot_Data_t Root_Data;
+    // static Libsymbiot_Conf_t Root_Dot;
     static Libsymbiot_Conf_t Root_Conf;
     // emulating the debug tree of the system
-    static Libsymbiot_Data_t *Debug_Data_p;
-    static Libsymbiot_Conf_t *Debug_Dot_p;
+    // static Libsymbiot_Data_t *Debug_Data_p;
+    // static Libsymbiot_Conf_t *Debug_Dot_p;
     static Libsymbiot_Conf_t *Debug_Conf_p;
     // static reference
-    static Libsymbiot_Data_t Debug_Data;
-    static Libsymbiot_Conf_t Debug_Dot;
+    // static Libsymbiot_Data_t Debug_Data;
+    // static Libsymbiot_Conf_t Debug_Dot;
     static Libsymbiot_Conf_t Debug_Conf;
 
     // linking the structures
-    Root_Data_p=&Root_Data;
+    // Root_Data_p=&Root_Data;
     Root_Conf_p=&Root_Conf;
-    Root_Conf_p=&Root_Dot;
-    Debug_Data_p=&Debug_Data;
+    // Root_Dot_p=&Root_Dot;
+    // Debug_Data_p=&Debug_Data;
     Debug_Conf_p=&Debug_Conf;
-    Debug_Conf_p=&Debug_Dot;
-    Buffer.buf_p=hexbuf;
+    // Debug_Dot_p=&Debug_Dot;
+    // Buffer.buf_p=hexbuf;
 
     // make Root_p only - copy later
 
@@ -156,14 +156,14 @@ int main(int argc, char **arv){
 		Debug_Conf_p->log_fp=Root_Conf_p->log_fp;
 		Debug_Conf_p->dot_fp=Root_Conf_p->dot_fp;
 		fprintf(Debug_Conf_p->log_fp,"\ntb_main: try new(Debug_Conf_p) at %p\n",Debug_Conf_p);	
-	//	tb_libsymbiot_dot( Debug_Conf_p);
-//		fprintf(Debug_Conf_p->dot_fp,"\tstruct1 [share=record,label=\"<f0>| %%p(Root_p)=\n%p|<f1>%%p(Config_p)=\n%p | %%p(Dot_p)=\n%p\"];",);
+		tb_libsymbiot_dot( Debug_Conf_p);
+		fprintf(Debug_Conf_p->dot_fp,"\tstruct1 [share=record,label=\"<f0>| %%p(Root_p)=\n%p|<f1>%%p(Config_p)=\n%p];",Root_Conf_p,Debug_Conf_p);
 	}			
 
 	fprintf(Root_Conf_p->log_fp,"\ntb_main: try intelhex(Root_Conf_p)=%p\n",Root_Conf_p);
 	libsymbiot_intelhex(Root_Conf_p);
 	fclose (log_fp);
-//	fclose (dot_fp);
+	fclose (dot_fp);
 	fclose (dbg_fp);
 //	fclose (html_fp);
     return 0;

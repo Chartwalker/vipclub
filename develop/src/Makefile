@@ -5,35 +5,36 @@ include ./config.mk
 TARGETS=$(TSC_PRJG_TARGETS)
 
 all: clean includes libs guis docs tests
-	#make -C ./lib/libsymbiot/ all
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ./lib/libsymbiot/ all
 
 includes:
-	$(TSC_SBP_ECHOE) make $(TSC_CDPA_INCL)
-	$(TSC_SBP_MKDIRI) $(TSC_CDPA_INCL)/$(TSC_PRJG_FNAME)/$(TSC_CDN_GUI)
-	$(TSC_SBP_CP) $(TSC_CDPA_GUI)/vipclub-gui.h  $(TSC_CDPA_INCL)/$(TSC_PRJG_FNAME)/vipclub-gui.h
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) $(TSC_CDPA_INCL)
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKDIRI) $(TSC_CDPA_INCL)
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKDIRI) $(TSC_CDPA_INCL)/$(TSC_PRJG_FNAME)
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_CP) $(TSC_CDPA_GUI)/vipclub-gui.h $(TSC_CDPA_INCL)/$(TSC_PRJG_FNAME)/vipclub-gui.h
 
 clis:
-	#make -C ./gui clis
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ./cli clis
 
 guis:
-	#make -C ./gui guis
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ./gui guis
 
 cgis:
-	#make -C ./cgi cgis
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ./cgi cgis
 
 libs:
-	$(TSC_SBP_ECHOE) make $(TSC_CDPA_LIB)
-	$(TSC_SBP_MKDIRI) $(TSC_CDPA_LIB)/$(TSC_PRJG_FNAME)
-	$(TSC_SBP_CP) $(TSC_CDPA_GUI)/libvipclub-gui.a  $(TSC_CDPA_LIB)/$(TSC_PRJG_FNAME)/libvipclub-gui.a
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) $(TSC_CDPA_LIB)
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKDIRI) $(TSC_CDPA_LIB)
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_MKDIRI) $(TSC_CDPA_LIB)/$(TSC_PRJG_FNAME)
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_CP) $(TSC_CDPA_GUI)/libvipclub-gui.a $(TSC_CDPA_LIB)/$(TSC_PRJG_FNAME)/libvipclub-gui.a
 
 clean:
-	#make -C ./lib/libsymbiot/ clean
-	#make -C ../develdoc/ clean
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ./lib/libsymbiot/ clean
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ../develdoc/ clean
 
 docs:
-	#make -C ./lib/libsymbiot/ docs
-	#make -C ../develdoc/ docs
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ./lib/libsymbiot/ docs
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ../develdoc/ docs
 
 tests:
-	#make -C ./lib/libsymbiot/ tests
-
+	$(TSC_SBP_MKSILENT)$(TSC_SBP_ECHOE) $(TSC_SBP_MKDIRI) ./lib/libsymbiot/ tests

@@ -146,16 +146,24 @@ TSC_SBP_MKDIRI=`which mkdir`" -p"
 TSC_SBP_RM=`which rm`" -f"
 TSC_SBP_RMDIR=`which rmdir`
 TSC_SBP_RMDIRI=`which rmdir`" --ignore-fail-on-non-empty"
+TSC_SBP_TS="\`date \"+%d.%m.%Y_%H:%M:%S\"\`"
+
 #
-# switch with uncomment as needed - see command or not
-#TSC_SBP_MKSILENT=
-TSC_SBP_MKSILENT=@
+# switch with "XOR-uncomment" as needed 
+#
+# see make command or not
+#TSC_XOR_MKSILENT=
+TSC_XOR_MKSILENT=@
+#
+# get warings or not
+TSC_XOR_CCWARN="-Wall -Wstrict-prototypes"
+#TSC_XOR_CCWARN=
 #
 TSC_SBP_YACC=$TSC_SBP_BISON
 
 # linker and compiler flags
 
-CFLAGS_GLIB=`pkg-config --cflags glib-2.0`" -I /usr/lib64 -I "$TSC_CDPA_INCL
+CFLAGS_GLIB=`pkg-config --cflags glib-2.0`" "$TSC_XOR_CCWARN" -I /usr/lib64 -I "$TSC_CDPA_INCL
 CFLAGS_GTK=`pkg-config --cflags gtk+-3.0`
 LIBS_GLIB=`pkg-config --libs glib-2.0`" -L /usr/lib64 -L "$TSC_CDPA_LIB" -lglib-2.0 -lsymbiot"
 LIBS_GTK=`pkg-config --libs gtk+-3.0`
@@ -218,11 +226,11 @@ tsc_write_env(){
 
 	$TSC_SBP_ECHOE "\n"$2" projekt global settings - name of the game :-) as strings" >> $5
 
-   	$TSC_SBP_ECHOE "\n"$1"TSC_PRJG_LEVEL$4"$TSC_PRJG_LEVEL >> $5 >> $5
-   	$TSC_SBP_ECHOE $1"TSC_PRJG_PSUMS$4"$TSC_PRJG_PSUMS >> $5 >> $5
-   	$TSC_SBP_ECHOE $1"TSC_PRJG_PSUML$4"$TSC_PRJG_PSUML >> $5 >> $5
-   	$TSC_SBP_ECHOE $1"TSC_PRJG_PGRP$4"$TSC_PRJG_PGRP >> $5 >> $5
-   	$TSC_SBP_ECHOE $1"TSC_PRJG_PLIC$4"$TSC_PRJG_PLIC >> $5 >> $5
+	$TSC_SBP_ECHOE "\n"$1"TSC_PRJG_LEVEL$4"$TSC_PRJG_LEVEL >> $5 >> $5
+	$TSC_SBP_ECHOE $1"TSC_PRJG_PSUMS$4"$TSC_PRJG_PSUMS >> $5 >> $5
+	$TSC_SBP_ECHOE $1"TSC_PRJG_PSUML$4"$TSC_PRJG_PSUML >> $5 >> $5
+	$TSC_SBP_ECHOE $1"TSC_PRJG_PGRP$4"$TSC_PRJG_PGRP >> $5 >> $5
+	$TSC_SBP_ECHOE $1"TSC_PRJG_PLIC$4"$TSC_PRJG_PLIC >> $5 >> $5
 
 	$TSC_SBP_ECHOE "\n"$1"TSC_PRJG_COPYR$4"$TSC_PRJG_COPYR >> $5
 	$TSC_SBP_ECHOE $1"TSC_PRJG_DEDIT$4"$TSC_PRJG_DEDIT >> $5
@@ -360,9 +368,13 @@ tsc_write_env(){
 	$TSC_SBP_ECHOE $1"TSC_SBP_RMDIR$4"$TSC_SBP_RMDIR >> $5
 	$TSC_SBP_ECHOE $1"TSC_SBP_RMDIRI$4"$TSC_SBP_RMDIRI >> $5
 	$TSC_SBP_ECHOE $1"TSC_SBP_MKSILENT$4"$TSC_SBP_MKSILENT >> $5
+	$TSC_SBP_ECHOE $1"TSC_SBP_TS$4"$TSC_SBP_TS >> $5
 	$TSC_SBP_ECHOE $1"TSC_SBP_YACC$4"$TSC_SBP_YACC >> $5
 
 	$TSC_SBP_ECHOE "\n"$2" linker and compiler flags" >> $5
+
+	$TSC_SBP_ECHOE "\n"$1"TSC_XOR_MKSILENT$4"$TSC_XOR_MKSILENT >> $5
+	$TSC_SBP_ECHOE $1"TSC_XOR_CCWARN$4"$TSC_XOR_CCWARN >> $5
 
 	$TSC_SBP_ECHOE "\n"$1"CFLAGS_GLIB$4"$CFLAGS_GLIB >> $5
 	$TSC_SBP_ECHOE $1"CFLAGS_GTK$4"$CFLAGS_GTK >> $5
