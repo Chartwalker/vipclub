@@ -26,22 +26,24 @@ GString *Dbg_I(Main_Init_t *Main_Init){
 				g_string_insert_c (Dbg_Temp,0,0x20);
 			}	
 		}	
-		g_string_printf(Dbg_Temp,"%s%s",Dbg_s,Main_Init_p->Dbg_M);
+		g_string_printf(Dbg_Temp,"%s%s",Dbg_s,Main_Init_p->Dbg_M->str);
 		 
 	}	
 	return 	Dbg_Temp;
 }	
 
 int main_init(Main_Init_t *Main_Init_p){
+	gint retval_i=0;
 	// please use only theadsafe functions here - only use g_string_new instead g_string_sprintf
-	GString *Temp_gsp; 	// temp string-buffer
-	gint * temp_i;			// return value
+	// GString *Temp_gsp; 	// temp string-buffer
+	// gint * temp_i;			// return value
 	char *Dbg_s;
 	Main_Init_p->Dbg_D = g_string_new((const char*) "  dbg(main_init): ");
+	Dbg_s = Main_Init_p->Dbg_D->str;
 	Main_Init_p->Asc_Time = g_string_new((const char*) "");
 
 	g_string_append(Main_Init_p->Asc_Time,asctime(localtime (&(Main_Init_p->rawtime))));
-	g_fprintf(Main_Init_p->dbg_fp,"\n%app-time=%s",Dbg_s,Main_Init_p->Asc_Time->str);
+	g_fprintf(Main_Init_p->dbg_fp,"\n%sapp-time=%s",Dbg_s,Main_Init_p->Asc_Time->str);
 	Dbg_s = Main_Init_p->Dbg_D->str;
 	// == directory config dir	
 	// cwd at calling
@@ -58,14 +60,14 @@ int main_init(Main_Init_t *Main_Init_p){
 	// == runtime config
 	// logical app - init GString *App_Name_gsp;
 	//
-	g_set_application_name(TSC_PrettyProj);
+	g_set_application_name(TSC_PRJG_VERSION_S);
 	//
 	Main_Init_p->App_Name_gsp=g_string_new((const char*) g_get_application_name());
 	g_fprintf(Main_Init_p->dbg_fp,"\n%sApp_Name=%s",Dbg_s,Main_Init_p->App_Name_gsp->str);	
 	//
 	// physical app - init GString *App_Name_gsp;
 	//
-	g_set_prgname (TSC_NAME);
+	g_set_prgname (TSC_PRJG_VERSION_S);
 	//
 	Main_Init_p->Prg_Name_gsp=g_string_new((const char*) g_get_prgname());
 	g_fprintf(Main_Init_p->dbg_fp,"\n%sPrg_Name=%s",Dbg_s,Main_Init_p->Prg_Name_gsp->str);
@@ -140,6 +142,7 @@ int main_init(Main_Init_t *Main_Init_p){
 	//err_gfp=g_file_new_for_path (vipclub_gui.error);
 	// g_set_prgname(TSC_Proj);
 	// g_set_application_name(TSC_PrettyProj);
+    return retval_i;
 }
 
 int main (int argc, char *argv[]){
@@ -212,7 +215,7 @@ int main (int argc, char *argv[]){
 }
 
 // main destroy callback
-void on_window_main_destroy(){
+void on_window_main_destroy(void){
 	char *Dbg_s ="  dbg(cb_mn_destroy): ";
 	g_fprintf(Main_Init_p->cb_fp,"\n%s- bye\n",Dbg_s);
 	fflush(Main_Init_p->cb_fp);
@@ -220,7 +223,7 @@ void on_window_main_destroy(){
 }
 
 // main destroy callback
-void on_mnm_file_quit(){
+void on_mnm_file_quit(void){
 	char *Dbg_s = "  dbg(cb_mnm_file_quit): ";
 	g_fprintf(Main_Init_p->cb_fp,"\n%s- bye\n",Dbg_s);
 	fflush(Main_Init_p->cb_fp);
@@ -228,31 +231,33 @@ void on_mnm_file_quit(){
 }
 
 // main menu file new callback
-void on_mnm_file_new(){
+void on_mnm_file_new(void){
 	char *Dbg_s = "  dbg(cb_mnm_file_new): ";
 	g_fprintf(Main_Init_p->cb_fp,"\n%s",Dbg_s);
 	fflush(Main_Init_p->cb_fp);
 }
 
 // main menu view config setup
-void on_mnm_view_conf_setup(){
+void on_mnm_view_conf_setup(void){
 	char *Dbg_s = "  dbg(cb_mnm_view_conf_setup): ";
 	g_fprintf(Main_Init_p->cb_fp,"\n%s",Dbg_s);
 	fflush(Main_Init_p->cb_fp);
 }
 
 // main menu file config save
-void on_mnm_view_conf_save(){
+void on_mnm_view_conf_save(void){
 	char *Dbg_s = "  dbg(cb_mnm_view_conf_save): ";
 	g_fprintf(Main_Init_p->cb_fp,"\n%s",Dbg_s);
 	fflush(Main_Init_p->cb_fp);
 }
 
 int schedule_queue_in(int priority, int slot,int (cb_schedule)(int)){
-	static int i,j;
-	int priority_max = 100;
-	int max_slot_max = 100;
+    gint retval_i=0;
+	// static int i,j;
+	// int priority_max = 100;
+	// int max_slot_max = 100;
 	// for (if i >=priority_max i=0; ;if ii<priority_max then ;i++
+    return retval_i;
 }
 
 int timeout_callback(gpointer data){

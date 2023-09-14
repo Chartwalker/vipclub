@@ -5,8 +5,8 @@
 GtkBuilder *builder;
 GtkWidget *window;
 
-static gint *retval_i;
-static gchar *retval_s;
+// static gint *retval_i;
+// static gchar *retval_s;
 Buffer_t Buffer;
 gchar hexbuf[PAGE_SIZE];
 
