@@ -38,6 +38,8 @@ TSC_PRJG_TARGET="vipclub vipclub_tb vipclub_dbg vipclub_gui vipclub_gui_tb vipcl
 TSC_PRJG_VERSION=$TSC_PRJG_FNAME-$TSC_PRJG_MAJOR.$TSC_PRJG_MINOR.$TSC_PRJG_RELEASE-$TSC_PRJG_PATCH
 TSC_PRJG_VERSION_S=\"$TSC_PRJG_VERSION\"
 
+
+
 # config directory names
 
 TSC_CDN_CLI="cli"
@@ -159,6 +161,36 @@ TSC_XOR_MKSILENT=@
 TSC_XOR_CCWARN="-Wall -Wstrict-prototypes"
 #TSC_XOR_CCWARN=
 #
+
+# debug xor switches "blank" or "1"
+# global on / off
+TSC_XOR_DBG_GLOBAL=1
+#TSC_XOR_DBG_GLOBAL=
+TSC_XOR_DBG_PRINT=1
+#TSC_XOR_DBG_PRINT=
+TSC_XOR_DBG_CTRL=1
+#TSC_XOR_DBG_CTRL=
+TSC_XOR_DBG_CB=1
+#TSC_XOR_DBG_CB=
+TSC_XOR_DBG_SIZE=1
+#TSC_XOR_DBG_SIZE=
+TSC_XOR_DBG_PTR=1
+#TSC_XOR_DBG_PTR=
+
+if [ "$TSC_XOR_DBG_GLOBAL" = "" ] 
+then 
+    echo debugging is off 
+    TSC_XOR_DBG_PRINT=
+    SC_XOR_DBG_CTRL=
+    TSC_XOR_DBG_CB=
+    TSC_XOR_DBG_SIZE=
+    TSC_XOR_DBG_PTR=
+else
+    $TSC_SBP_ECHOE debugging is on with dbg_print=$TSC_XOR_DBG_PRINT dbg_ctrl=$TSC_XOR_DBG_CTRL \
+dbg_cb=$TSC_XOR_DBG_CB dbg_size=$TSC_XOR_DBG_SIZE dbg_ptr=$TSC_XOR_DBG_PTR
+fi
+
+
 TSC_SBP_YACC=$TSC_SBP_BISON
 
 # linker and compiler flags
