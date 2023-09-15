@@ -164,8 +164,8 @@ TSC_XOR_CCWARN="-Wall -Wstrict-prototypes"
 
 # debug xor switches "blank" or "1"
 # global on / off
-#TSC_XOR_DBG_GLOBAL=1
-TSC_XOR_DBG_GLOBAL=
+TSC_XOR_DBG_GLOBAL=1
+#TSC_XOR_DBG_GLOBAL=
 TSC_XOR_DBG_PRINT=1
 #TSC_XOR_DBG_PRINT=
 TSC_XOR_DBG_CTRL=1
@@ -195,10 +195,10 @@ TSC_SBP_YACC=$TSC_SBP_BISON
 
 # linker and compiler flags
 
-CFLAGS_GLIB=`pkg-config --cflags glib-2.0`" "$TSC_XOR_CCWARN" -I /usr/lib64 -I "$TSC_CDPA_INCL
-CFLAGS_GTK=`pkg-config --cflags gtk+-3.0`
-LIBS_GLIB=`pkg-config --libs glib-2.0`" -L /usr/lib64 -L "$TSC_CDPA_LIB" -lglib-2.0 -lsymbiot"
-LIBS_GTK=`pkg-config --libs gtk+-3.0`
+CFLAGS_GLIB=`pkg-config --cflags glib-2.0 glibmm-2.4 giomm-2.4`" "$TSC_XOR_CCWARN" -I /usr/lib64 -I "$TSC_CDPA_INCL
+CFLAGS_GTK=`pkg-config --cflags gtk+-3.0 glibmm-2.4`
+LIBS_GLIB=`pkg-config --libs glib-2.0 glibmm-2.4 giomm-2.4`" -L /usr/lib64 -L "$TSC_CDPA_LIB" -lglib-2.0 -lsymbiot"
+LIBS_GTK=`pkg-config --libs gtk+-3.0 gtkmm-2.4`
 
 # debug defines
 
