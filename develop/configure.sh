@@ -40,8 +40,6 @@ TSC_PRJG_TARGET="vipclub vipclub_tb vipclub_dbg vipclub_gui vipclub_gui_tb vipcl
 TSC_PRJG_VERSION=$TSC_PRJG_FNAME-$TSC_PRJG_MAJOR.$TSC_PRJG_MINOR.$TSC_PRJG_RELEASE-$TSC_PRJG_PATCH
 TSC_PRJG_VERSION_S=\"$TSC_PRJG_VERSION\"
 
-
-
 # config directory names
 
 TSC_CDN_CLI="cli"
@@ -96,7 +94,6 @@ TSC_CDPA_SRC=$TSC_CDPA_CONF"/"$TSC_CDN_SRC
 TSC_CDPA_CLI=$TSC_CDPA_CONF"/"$TSC_CDN_SRC"/"$TSC_CDN_CLI
 TSC_CDPA_GUI=$TSC_CDPA_CONF"/"$TSC_CDN_SRC"/"$TSC_CDN_GUI
 TSC_CDPA_LIBSYMBIOT=$TSC_CDPA_CONF"/"$TSC_CDN_SRC"/"$TSC_CDN_LIB"/"$TSC_CFN_LIBSYMBIOT
-
 
 # config directory path relative
 # relative under the install-tree
@@ -164,6 +161,8 @@ TSC_XOR_MKSILENT=@
 TSC_XOR_CCWARN="-Wall -Wstrict-prototypes"
 #TSC_XOR_CCWARN=
 #
+TSC_XOR_CPPWARN="-Wall"
+#TSC_XOR_CPPWARN=
 
 # debug xor switches "blank" or "1"
 # global on / off
@@ -198,10 +197,10 @@ TSC_SBP_YACC=$TSC_SBP_BISON
 
 # linker and compiler flags
 
-CFLAGS_GLIB=`pkg-config --cflags glib-2.0 glibmm-2.68 giomm-2.68 sigc++-3.0`" "$TSC_XOR_CCWARN" -I /usr/lib64 -I /usr/include/gtkmm-4.0 -I /usr/include/giomm-4.0 -I /usr/include/gtk-4.0 -I "$TSC_CDPA_INCL
-CFLAGS_GTK=`pkg-config --cflags gtk+-3.0 gtkmm-4.0 pangomm-2.48 cairomm-1.16`
-LIBS_GLIB=`pkg-config --libs glib-2.0 glibmm-2.68 giomm-2.68`" -L /usr/lib64 -L "$TSC_CDPA_LIB" -lglib-2.0 -lsymbiot"
-LIBS_GTK=`pkg-config --libs gtk+-3.0 gtkmm-4.0`
+CFLAGS_GLIB=`pkg-config --cflags glibmm-2.68 giomm-2.68 sigc++-3.0`" -I /usr/lib64 -I /usr/include/gtkmm-4.0 -I /usr/include/giomm-4.0 -I /usr/include/gtk-4.0 -I "$TSC_CDPA_INCL
+CFLAGS_GTK=`pkg-config --cflags gtkmm-4.0 pangomm-2.48 cairomm-1.16`
+LIBS_GLIB=`pkg-config --libs glibmm-2.68 giomm-2.68`" -L /usr/lib64 -L "$TSC_CDPA_LIB" -lsymbiot"
+LIBS_GTK=`pkg-config --libs gtkmm-4.0 gtkmm-4.0 pangomm-2.48 cairomm-1.16`
 
 # debug defines
 
@@ -412,6 +411,7 @@ tsc_write_env(){
 
 	$TSC_SBP_ECHOE "\n"$1"TSC_XOR_MKSILENT$4"$TSC_XOR_MKSILENT >> $5
 	$TSC_SBP_ECHOE $1"TSC_XOR_CCWARN$4"$TSC_XOR_CCWARN >> $5
+	$TSC_SBP_ECHOE $1"TSC_XOR_CPPWARN$4"$TSC_XOR_CPPWARN >> $5
 
 	$TSC_SBP_ECHOE "\n"$1"CFLAGS_GLIB$4"$CFLAGS_GLIB >> $5
 	$TSC_SBP_ECHOE "\n"$1"CFLAGS_GTK$4"$CFLAGS_GTK >> $5
