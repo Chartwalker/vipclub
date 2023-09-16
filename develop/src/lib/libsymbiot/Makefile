@@ -7,15 +7,17 @@ MKSILENT=
 
 all: clean includes libsymbiot.a libs doc
 
-libsymbiot.a: libsymbiot.h libsymbiot.c libsymbiot_tb.c
-	$(MKSILENT)$(TSC_SBP_CC) $(CFLAGS_GLIB) $(CFLAGS_GTK) -Wall -c libsymbiot.c $(LIBS_GLIB)
+libsymbiot.a: libsymbiot.h libsymbiot.cc libsymbiot_tb.cc
+	$(MKSILENT)$(TSC_SBP_CPP) $(CFLAGS_GLIB) $(CFLAGS_GTK) $(TSC_XOR_CPPWARN) -c libsymbiot.cc $(LIBS_GLIB)
 	$(MKSILENT)$(TSC_SBP_AR) libsymbiot.a libsymbiot.o
 
 test: libsymbiot_tb
-	./libsymbiot_tb > libsymbiot_tb.$(TSC_SBP_TS).log
- 
-libsymbiot_tb: libsymbiot.a libsymbiot_tb.c
-	$(MKSILENT)$(TSC_SBP_CC) $(CFLAGS_GLIB) $(CFLAGS_GTK) -o libsymbiot_tb libsymbiot_tb.c $(LIBS_GLIB) $(LIBS_GTK) -lsymbiot
+	#./libsymbiot_tb > libsymbiot_tb.$(TSC_SBP_TS).log 
+	./libsymbiot_tb
+
+
+libsymbiot_tb: libsymbiot.a libsymbiot_tb.cc
+	$(MKSILENT)$(TSC_SBP_CPP) $(CFLAGS_GLIB) $(CFLAGS_GTK) $(TSC_XOR_CPPWARN) -o libsymbiot_tb libsymbiot_tb.cc $(LIBS_GLIB) $(LIBS_GTK) -lsymbiot
 
 dist: includes libs test
 
